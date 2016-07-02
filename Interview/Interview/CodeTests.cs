@@ -49,5 +49,55 @@ namespace Interview
         {
             Expect(I.RepalceSpaceWith20(word, size), Is.EqualTo(result));
         }
+
+        [Test]
+        [TestCase("aaabbbcccccaad","a3b3c5a2d1")]
+        [TestCase("abcde","abcde")]
+        public void ReplaceSpaceWith20(string word, string result)
+        {
+            Expect(I.ReducedRepeatedLetters(word), Is.EqualTo(result));
+        }
+
+        [Test]
+        public void RotateNxNBy90()
+        {
+            var n1 = new int[4, 4]
+            {
+                {1, 2, 3, 4},
+                {5, 6, 7, 8},
+                {9, 10, 11, 12},
+                {13, 14, 15, 16}
+            };
+
+            var n2 = new int[4, 4]
+            {
+                {13, 9, 5, 1},
+                {14, 10, 6, 2},
+                {15, 11, 7, 3},
+                {16, 12, 8, 4}
+            };
+
+            Expect(I.RotateNxNBy90(n1), Is.EqualTo(n2));
+        }
+
+        [Test]
+        public void DeleteRowAndColWith0()
+        {
+            var n1 = new int[3, 4]
+            {
+                {1, 2, 3, 4},
+                {5, 0, 7, 0},
+                {9, 10, 11, 12}
+            };
+
+            var n2 = new int[3, 4]
+            {
+                {1, 0, 3, 0},
+                {0, 0, 0, 0},
+                {9, 0, 11, 0}
+            };
+
+            Expect(I.DeleteRowAndColWith0(n1), Is.EqualTo(n2));
+        }
     }
 }

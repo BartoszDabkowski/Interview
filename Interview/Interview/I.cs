@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using NUnit.Framework.Constraints;
 
 namespace Interview
 {
@@ -111,17 +112,106 @@ namespace Interview
             return newWord.ToString();
         }
 
-        //public static StringBuilder ShiftChars(StringBuilder word, int start, int last)
-        //{
-        //    word[last] = word[start - 2];
-        //    word[last + 1] = word[start - 1];
-        //    word[last + 2] = word[start];
+        public static string ReducedRepeatedLetters(string word)
+        {
+            var nWord = new StringBuilder("");
 
-        //    word[start] = '0';
-        //    word[start - 1] = '2';
-        //    word[start - 2] = '%';
+            var count = 1;
+            var letter = word[0];
+            for (var i = 1; i < word.Length; i++)
+            {
+                if (word[i] == letter)
+                {
+                    count++;
+                }
+                else
+                {
+                    nWord.Append(letter);
+                    nWord.Append(count);
+                    letter = word[i];
+                    count = 1;
+                }
+            }
+            nWord.Append(letter);
+            nWord.Append(count);
 
-        //    return word;
-        //}
+            return (nWord.Length > word.Length) ? word : nWord.ToString();
+        }
+
+        public static int[,] RotateNxNBy90(int[,] n1)
+        {
+            for (var i = 0; i < n1.GetLength(0) / 2; i++)
+            {
+                var first = i;
+                var last = n1.GetLength(0) - 1 - i;
+
+                for (var j = first; j < last; j++)
+                {
+                    var temp = n1[first, first + j];
+                    n1[first, first + j] = n1[last - j, first];
+                    n1[last - j, first] = n1[last, last - j];
+                    n1[last, last - j] = n1[first + j, last];
+                    n1[first + j, last] = temp;
+
+                    //Debug
+                    //Console.WriteLine("(" + first + "," + (first + j) + ") =" + "(" + (last - j) + "," + first + ")");
+                    //Console.WriteLine("(" + (last - j) + "," + first + ") =" + "(" + last + "," + (last - j) + ")");
+                    //Console.WriteLine("(" + last + "," + (last - j) + ") =" + "(" + (first + j) + "," + last + ")");
+                    //Console.WriteLine("(" + (first + j) + "," + last + ") =" + "(" + first + "," + (first + j) + ")");
+                    //Console.WriteLine();
+                }
+                //Console.WriteLine("--------------------------");
+            }
+            return n1;
+        }
+
+        public static int[,] DeleteRowAndColWith0(int[,] n1)
+        {
+            var rowsWith0 = new bool[n1.GetLength(0)];
+            var colsWith0 = new bool[n1.GetLength(1)];
+
+            for (var i = 0; i < n1.GetLength(0); i++)
+            {
+                for (var j = 0; j < n1.GetLength(1); j++)
+                {
+                    if (n1[i, j] == 0)
+                    {
+                        rowsWith0[i] = true;
+                        colsWith0[j] = true;
+                    }
+                }
+            }
+
+            for (var row = 0; row < rowsWith0.Length; row++)
+            {
+                if (rowsWith0[row])
+                    n1 = NullifyRows(n1, row);
+            }
+
+            for (var col = 0; col <colsWith0.Length; col++)
+            {
+                if (colsWith0[col])
+                    n1 = NullifyCols(n1, col);
+            }
+            return n1;
+        }
+
+        public static int[,] NullifyRows(int[,] n1, int row)
+        {
+            for (var i = 0; i < n1.GetLength(1); i++)
+            {
+                n1[row, i] = 0;
+            }
+            return n1;
+        }
+
+        public static int[,] NullifyCols(int[,] n1, int col)
+        {
+            for (var i = 0; i < n1.GetLength(0); i++)
+            {
+                n1[i, col] = 0;
+            }
+            return n1;
+        }
     }
 }
