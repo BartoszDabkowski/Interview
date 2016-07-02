@@ -10,6 +10,8 @@ namespace Interview
     {
         static void Main(string[] args)
         {
+            Console.WriteLine(I.RepalceSpaceWith20("str ing  ", 7));
+            Console.ReadKey();
         }
     }
 }

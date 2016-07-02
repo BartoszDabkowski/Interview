@@ -14,7 +14,7 @@ namespace Interview
         }
 
         [Test]
-        [TestCase(new int[] { 1, 3, 2, 4, 5, 5, 6, 1 }, true)]
+        [TestCase(new int[] { 1, 3, 2, 4, 5, 9, 6, 1 }, true)]
         [TestCase(new int[] { 1, 3, 2, 4, 5, 8, 6, 9 }, false)]
         public void Duplicate(int[] input, bool result)
         {
@@ -28,6 +28,26 @@ namespace Interview
         public void Reverse(string word, string result)
         {
             Expect(I.ReverseWord(word), Is.EqualTo(result));
+        }
+
+        [Test]
+        [TestCase("dog", "god", true)]
+        [TestCase("fire", "ifre", true)]
+        [TestCase("abcdefg", "gacbdef", true)]
+        [TestCase("abcdefg", "abcdet", false)]
+        [TestCase("abcdefg", "111111111", false)]
+        public void IsPermutation(string word1, string word2, bool result)
+        {
+            Expect(I.IsPermutation(word1, word2), Is.EqualTo(result));
+            Expect(I.IsPermutation2(word1, word2), Is.EqualTo(result));
+        }
+
+        [Test]
+        [TestCase("str ing  ", 7, "str%20ing")]
+        [TestCase(" s tr in g        ", 10, "%20s%20tr%20in%20g")]
+        public void ReplaceSpaceWith20(string word, int size, string result)
+        {
+            Expect(I.RepalceSpaceWith20(word, size), Is.EqualTo(result));
         }
     }
 }
