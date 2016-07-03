@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework.Constraints;
 
 namespace Interview
 {
@@ -62,7 +61,7 @@ namespace Interview
             if (word1.Length != word2.Length)
                 return false;
 
-            return sortWord(word1).Equals(sortWord(word2));
+            return SortWord(word1).Equals(SortWord(word2));
         }
         public static bool IsPermutation2(string word1, string word2)
         {
@@ -83,7 +82,7 @@ namespace Interview
             }
             return true;
         }
-        public static string sortWord(string word)
+        private static string SortWord(string word)
         {
             var sortedWord = word.ToCharArray();
             Array.Sort(sortedWord);
@@ -195,8 +194,7 @@ namespace Interview
             }
             return n1;
         }
-
-        public static int[,] NullifyRows(int[,] n1, int row)
+        private static int[,] NullifyRows(int[,] n1, int row)
         {
             for (var i = 0; i < n1.GetLength(1); i++)
             {
@@ -204,8 +202,7 @@ namespace Interview
             }
             return n1;
         }
-
-        public static int[,] NullifyCols(int[,] n1, int col)
+        private static int[,] NullifyCols(int[,] n1, int col)
         {
             for (var i = 0; i < n1.GetLength(0); i++)
             {

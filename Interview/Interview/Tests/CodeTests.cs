@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace Interview
+namespace Interview.Tests
 {
     public class CodeTests : AssertionHelper
     {
